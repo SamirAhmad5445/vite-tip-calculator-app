@@ -51,9 +51,7 @@ tipButtons.forEach((btn) => {
 
 function calcTip() {
   if (!tip || !bill || !numberOfPeople) {
-    resetBtn.setAttribute("data-disabled", "");
-    tipOutput.innerText = "0.00";
-    totalOutput.innerText = "0.00";
+    resetOutput();
     return;
   }
   resetBtn.removeAttribute("data-disabled");
@@ -64,13 +62,19 @@ function calcTip() {
   totalOutput.innerText = totalPerPerson.toFixed(2);
 }
 
+function resetOutput() {
+  document.querySelector("[data-selected]")?.removeAttribute("data-selected");
+  resetBtn.setAttribute("data-disabled", "");
+  tipOutput.innerText = "0.00";
+  totalOutput.innerText = "0.00";
+}
+
 resetBtn.addEventListener("click", () => {
   billInput.value = "";
   tipInput.value = "";
   personInput.value = "";
-  document.querySelector("[data-selected]");
   bill = 0;
   tip = 0;
   numberOfPeople = 0;
-  calcTip();
+  resetOutput();
 });
